@@ -1,18 +1,17 @@
 <?php
-require_once("app/controllers/producto.api.controller.php");
-require_once("app/models/producto.api.model.php");
-require_once("app/models/categoria.api.model.php");
+require_once 'app/controllers/producto.api.controller.php';
+require_once 'app/models/producto.api.model.php';
+require_once 'app/models/categoria.api.model.php';
+require_once 'app/helpers/auten.api.helper.php';
 
 class ProductoApiController extends ApiController{
     //atributos
     private $model;
-    private $categoriaModel;
 
     //constructor
     public function __construct(){
         parent::__construct();  
         $this->model = new ProductoApiModel;
-        $this->categoriaModel = new CategoriaApiModel;
     }
 
     //metodos
@@ -59,6 +58,11 @@ class ProductoApiController extends ApiController{
     }
 
     public function deleteProducto($params = []){
+        $user = $this->autenHelper->currentUser();
+        if(!$user) {
+            $this->view->response('Unauthorized', 401);
+            return;
+        }
         $id = $params[':ID'];
         $producto = $this->model->getProductoById($id);
         //validacion
@@ -74,6 +78,11 @@ class ProductoApiController extends ApiController{
     }
 
     public function addProducto(){
+        $user = $this->autenHelper->currentUser();
+        if(!$user) {
+            $this->view->response('Unauthorized', 401);
+            return;
+        }
         //obtenemos el body que nos manda el cliente de la api
         $body = $this->getData(); //desarma el JSON y nos genera un objeto  
 
@@ -95,6 +104,11 @@ class ProductoApiController extends ApiController{
     }
 
     public function actualizarProducto($params = []){
+        $user = $this->autenHelper->currentUser();
+        if(!$user) {
+            $this->view->response('Unauthorized', 401);
+            return;
+        }
         //capturo el id
         $id = $params[':ID'];
         //me traigo el producto

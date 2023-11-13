@@ -1,7 +1,7 @@
 <?php
 //incluyo el config.php el cual se encarga de la conexion a la db
-require_once("database/config.php");
-require_once ('app/models/model.php');
+require_once 'database/config.php';
+require_once 'app/models/model.php';
 
 class ProductoApiModel extends Model{
 
@@ -62,6 +62,7 @@ class ProductoApiModel extends Model{
         $query->execute([$categoria, $nombre, $material, $color,$precio, $id]);
     }
 
+//obtenemos los atributos de la tabla
     public function obtenerCampos(){
         $query = $this->db->prepare("DESCRIBE productos");
         $query->execute();

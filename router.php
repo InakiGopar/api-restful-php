@@ -3,13 +3,14 @@
     require_once 'libs/routerPro.php';
     require_once 'app/controllers/categoria.api.controller.php';
     require_once 'app/controllers/producto.api.controller.php';
+    require_once 'app/controllers/usuario.api.controller.php';
 
     $router = new Router();
     //Rutas para tabla categorias
     #                   endpoint        verbo          controller               método
     $router->addRoute('categorias',     'GET',   'categoriaApiController',  'getCategorias' );
     $router->addRoute('categorias',     'POST',  'categoriaApiController',  'addCategoria' );
-    $router->addRoute('categorias/:ID', 'GET',   'categoriaApiController',  'getCategorias' );
+    $router->addRoute('categorias/:ID', 'GET',   'categoriaApiController',  'getCategoria' );
     $router->addRoute('categorias/:ID', 'PUT',   'categoriaApiController',  'actualizarCategoria' );
     $router->addRoute('categorias/:ID', 'DELETE','categoriaApiController',  'deleteCategoria');
     
@@ -21,6 +22,6 @@
     $router->addRoute('productos/:ID', 'DELETE',  'productoApiController',   'deleteProducto');
 
     //token
-    $router->addRoute('usuario/token',  'GET',     'usuarioApiController',       'getToken');
+    $router->addRoute('usuario/token',  'GET',     'UsuarioApiController',   'getToken');
 
     $router->route($_GET['resource'], $_SERVER['REQUEST_METHOD']);

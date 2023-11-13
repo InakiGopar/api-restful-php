@@ -7,13 +7,14 @@ function base64url_encode($data){
 }
 
 class AutenHelper {
-    function getAutenHeaders() {
+    public function getAutenHeaders() {
         $header = "";
         if(isset($_SERVER['HTTP_AUTHORIZATION']))
             $header = $_SERVER['HTTP_AUTHORIZATION'];
         if(isset($_SERVER['REDIRECT_HTTP_AUTHORIZATION']))
             $header = $_SERVER['REDIRECT_HTTP_AUTHORIZATION'];
         return $header;
+
     }
 
     public function createToken($payload) {
@@ -35,7 +36,8 @@ class AutenHelper {
 
         return $token;
     }
-public function verify($token) {
+
+    public function verify($token) {
         // $header.$payload.$signature
         $token = explode(".", $token); // [$header, $payload, $signature]
         $header = $token[0];

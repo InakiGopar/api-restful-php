@@ -7,7 +7,7 @@ class CategoriaApiModel extends Model{
     //obtiene y devuelve de la base de datos todas las categorias.
     public function getCategorias(){
         //envio la consulta
-        $query = $this->db->prepare("SELECT * FROM categorias ORDER BY categoria");
+        $query = $this->db->prepare("SELECT * FROM categorias");
         $query->execute();
         //$categorias es un arreglo de categorias
         $categorias = $query->fetchAll(PDO::FETCH_OBJ);
@@ -22,6 +22,13 @@ class CategoriaApiModel extends Model{
         $categoria = $query->fetch(PDO::FETCH_OBJ);
 
         return $categoria;
+    }
+
+    public function getCategoriasByFiltro($field, $value){
+        $query= $this->db->prepare("SELECT * FROM categorias WHERE $field =:value");
+        $query->bindValue(":value", $value, PDO::PARAM_STR);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
     //inserta la categoria en la base de datos
@@ -44,5 +51,12 @@ class CategoriaApiModel extends Model{
     public function modificarCategoria($id, $categoria, $fragil){
         $query = $this->db->prepare("UPDATE categorias SET categoria = ?, fragil = ? WHERE id_categoria = ?");
         $query->execute([$categoria, $fragil,$id]);
+    }
+    
+    //obtenemos los atributos de la tabla
+    public function obtenerCampos(){
+        $query = $this->db->prepare("DESCRIBE categorias");
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_OBJ);
     }
 }
