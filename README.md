@@ -3,7 +3,7 @@
 # Descipcion:
 Esta API tiene como objetivo acceder a los datos (categorias y productos) presentes en la base de datos de Mate Datos.
 
-# Endpoints
+# Endpoints -Categoria-
 
 ## GET api/categorias 
 Este endponit trae todas las categorías de la base de datos y por query params podemos filtrar los distintos
@@ -69,6 +69,9 @@ modifica mostrando el siguiente mensaje “mensaje”: “la categoría fue modi
 > Este endponit se podrá utilizar siempre y cuando se haga la validación token con éxito,
 > Caso contrario se mostrara un mensaje del tipo Unauthorized 401 el cual te informa que
 > no tenes permisos suficientes.
+
+
+# Endpoints -Productos-
 
 ## GET api/productos
 Este endponit trae todas los productos de la base y por query params podemos ordenar los
@@ -153,6 +156,10 @@ modifica mostrando el siguiente mensaje “mensaje”: “el producto fue modifi
 
 > [!NOTE]
 > En caso de ingresar un id_categoria no existente tirara un error.
+
+
+
+# Endpoints -Usuario-
 
 ## GET api/usuario/token
 Este endponit verifica si el usuario esta logueado en la base de datos, de ser asi crea un token para
